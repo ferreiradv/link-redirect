@@ -7,7 +7,8 @@
     <title>Redirection</title>
 </head>
 <body>
-    <form action="/" method="POST">
+    <h1>Edit link</h1>
+    <form action="/edit/<%=body.id%>" method="POST">
     <input type="text" name="title" placeholder="Title" class="field" value="<%=body.title%>" required>
     <input type="text" name="description" placeholder="Description" class="field" value="<%=body.description%>">
     <input type="text" name="url" placeholder="URL" class="field" value="<%=body.url%>" required>

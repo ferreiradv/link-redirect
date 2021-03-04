@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Links</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Links</h1>
+        <a href="/add">Add new links</a>
+        <%links.forEach(links=>{%>
+        <div class="card" id="<%=links.id%>">
+            <div class="d-flex flex-column">
+                <h2><%=links.title%></h2>
+                <div><%=links.description %></div>
+                <div><%=links.url%></div>
+            </div>
+            <button onclick="btnDelete('<%=links.id%>')">Delete</button>
+            <a href="/edit/<%=links.id%>">Edit</a>
+        </div>
+        <%})%>
+
+    </div>
+    <script>
+        function btnDelete(id) {
+            fetch('/' + id, {
+                method: 'DELETE'
+            }).then(res => {
+                if (res.status == 200) {
+                    res.text().then(linkId => {
+                        console.log(linkId);
+                        document.getElementById(linkId).remove();
+                    })
+                } else {
+                    res.json().then(error => {
+                        console.log(error.message);
+                    })
+                }
+            })
+        }
+    </script>
+
+</body>
+
+</html>
